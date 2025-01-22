@@ -13,7 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $query->execute(['login' => $username, 'password' => $password]);
         $user = $query->fetch();
 
-        if ($user) {
+        $res = mysql_query($query);
+        if ($row = mysql_fetch_array($res, MYSQL_NUM)) {
             // Сохраняем имя пользователя и roleId в сессии
             $_SESSION['username'] = $user['login'];
             $_SESSION['roleId'] = $user['roleId']; // Сохраняем roleId
